@@ -1,0 +1,10 @@
+services:
+  bot:
+    image: chat_mix_bot
+    build: ./bot/
+    #command: python3 bot.py
+    volumes:
+      - ./bot:/bot
+      - ./logs:/bot/logs
+    env_file: .env
+    restart: always
