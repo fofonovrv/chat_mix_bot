@@ -1,8 +1,8 @@
 import logging
 import datetime as dt
 from openai import AsyncOpenAI
-from config import OPENAI_API_KEY, OPENAI_MODEL, GENNADY_PERSONA
-from dbmap import save_summary_to_db
+from bot.config import OPENAI_API_KEY, OPENAI_MODEL, GENNADY_PERSONA
+from bot.dbmap import save_summary_to_db
 
 logger = logging.getLogger(__name__)
 client = AsyncOpenAI(

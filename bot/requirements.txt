@@ -1,5 +1,5 @@
 aiogram==3.20.0.post0
 #psycopg2-binary
 SQLAlchemy==1.4.36
-pillow==11.2.1
-openai
+#pillow==11.2.1
+openai==1.95.1

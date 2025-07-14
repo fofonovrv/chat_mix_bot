@@ -4,7 +4,8 @@ services:
     build: ./bot/
     #command: python3 bot.py
     volumes:
-      - ./bot:/bot
-      - ./logs:/bot/logs
+      - ./bot:/chat_mix_bot/bot
+      - ./logs:/chat_mix_bot/logs
+      - ./db:/chat_mix_bot/db
     env_file: .env
     restart: always

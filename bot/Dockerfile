@@ -1,17 +1,36 @@
+# Этап 1: Build-образ со всеми dev-зависимостями
+FROM python:3.13-slim AS builder
+
+WORKDIR /build
+
+# Устанавливаем необходимые dev-пакеты
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+    build-essential \
+    python3-dev && \
+    rm -rf /var/lib/apt/lists/*
+
+COPY ./ ./bot/
+
+# Устанавливаем зависимости в отдельную директорию
+RUN pip install --prefix=/install -r bot/requirements.txt
+
+
+# Этап 2: Финальный "чистый" образ
 FROM python:3.13-slim
 
-ENV PYTHONFAULTHANDLER=1
-ENV PYTHONUNBUFFERED=1
-ENV PYTHONHASHSEED=random
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV PIP_NO_CACHE_DIR=off
-ENV PIP_DISABLE_PIP_VERSION_CHECK=on
-ENV PIP_DEFAULT_TIMEOUT=100
+ENV PYTHONFAULTHANDLER=1 \
+    PYTHONUNBUFFERED=1 \
+    PYTHONHASHSEED=random \
+    PYTHONDONTWRITEBYTECODE=1 \
+    PIP_NO_CACHE_DIR=off \
+    PIP_DISABLE_PIP_VERSION_CHECK=on \
+    PIP_DEFAULT_TIMEOUT=100
 
-RUN mkdir /bot
-WORKDIR /bot
-COPY . .
+WORKDIR /chat_mix_bot
 
-RUN apt-get update && apt install -y python3 python3-pip python3-dev build-essential python3-venv && pip3 install -r requirements.txt
+# Копируем установленные зависимости из build-образа
+COPY --from=builder /install /usr/local
+COPY ./ ./bot/
 
-CMD ["python3", "/bot/bot.py"]
+CMD ["python3", "-m", "bot"]

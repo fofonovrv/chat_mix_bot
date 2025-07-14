@@ -1,7 +1,7 @@
 import os
 import re
 import datetime as dt
-from config import DB_STRING
+from bot.config import DB_STRING
 from sqlalchemy import create_engine, Column, Integer, Boolean, String, String, DateTime, ForeignKey, Text, desc, JSON
 from sqlalchemy.orm import scoped_session, declarative_base, sessionmaker, relationship, Mapper, joinedload
 from sqlalchemy.orm.exc import DetachedInstanceError

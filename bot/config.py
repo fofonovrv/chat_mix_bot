@@ -14,7 +14,7 @@ DB_NAME = os.environ.get('POSTGRES_DB')
 if os.environ.get('DB_TYPE') == 'postgres':
 	DB_STRING = f'postgresql+psycopg2://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}'
 else:
-	DB_STRING = 'sqlite:///db.sqlite3'
+	DB_STRING = 'sqlite:///db/db.sqlite3'
 
 OPENAI_API_KEY = os.environ.get('OPENAI_API_KEY', '')
 OPENAI_MODEL = 'gpt-4o-mini'

@@ -1,3 +1,6 @@
 .env
 *.sqlite3*
 *.log
+.venv
+*__pycache__
+*.pyc
